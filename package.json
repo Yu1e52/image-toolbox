@@ -1,0 +1,49 @@
+{
+  "name": "image-toolbox",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "图片工具箱：裁剪/压缩/水印/证件照换底排版，纯浏览器本地处理，零上传",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node scripts/test-pure.mjs",
+    "dev:exe": "npm run build && electron .",
+    "dist:exe": "npm run build && electron-builder --win portable",
+    "predist:exe": "node scripts/prepack-dist.cjs"
+  },
+  "dependencies": {
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "electron": "^45.3.4",
+    "electron-builder": "^26.18.0",
+    "vite": "^6.2.0"
+  },
+  "author": "portfolio",
+  "main": "desktop/main.js",
+  "build": {
+    "appId": "com.portfolio.imagetoolbox",
+    "productName": "Image Toolbox",
+    "directories": {
+      "output": "release-build"
+    },
+    "files": [
+      "desktop/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "asar": false,
+    "win": {
+      "target": "portable"
+    },
+    "portable": {
+      "artifactName": "image-toolbox-portable.exe"
+    },
+    "afterPack": "desktop/after-pack.cjs",
+    "electronDist": "node_modules/.electron-dist-clean"
+  }
+}
